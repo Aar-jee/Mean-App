@@ -24,6 +24,7 @@
 				$http.post('/conmanRoute',{anydata:$scope.ArraydataModel}).then(function(){
 					GetData();
 					$scope.ArraydataModel = '';
+					setTimeout(myReloadFunction, 3000);
 				});
 			};
 			$scope.removeData = function(itemToDelete){
@@ -32,6 +33,9 @@
 				});
 			};
 			
+			function myReloadFunction() {
+   			 window.location.reload();
+				}
 			function GetData(){
 				$http.get('/conmanRoute').then(function(response){
 				$scope.Arraydata = response.data;
