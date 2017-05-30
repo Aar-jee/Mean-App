@@ -19,7 +19,7 @@
 	controller: 'SignupController'
   });
 });
-		app.controller('HomeController',function ($scope,$http){
+		app.controller('HomeController',function ($scope,$http,$timeout){
 			$scope.SumitArraydata = function(){
 				$http.post('/conmanRoute',{anydata:$scope.ArraydataModel}).then(function(){
 					GetData();
@@ -35,6 +35,7 @@
 			
 			function myReloadFunction() {
    			GetData();
+			$timeout(myReloadFunction, 3000);
 				}
 			function GetData(){
 				$http.get('/conmanRoute').then(function(response){
@@ -42,7 +43,7 @@
 				return $scope.Arraydata;
 			});
 		}
-		setTimeout(myReloadFunction, 3000);
+		$timeout(myReloadFunction, 3000);
 	});
 	
 	app.controller('SignupController',function ($scope,$http){
