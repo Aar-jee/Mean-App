@@ -34,7 +34,7 @@
 			};
 			
 			function myReloadFunction() {
-   			 window.location.reload();
+   			GetData();
 				}
 			function GetData(){
 				$http.get('/conmanRoute').then(function(response){
@@ -42,7 +42,6 @@
 				return $scope.Arraydata;
 			});
 		}
-		GetData();
 		setTimeout(myReloadFunction, 3000);
 	});
 	
