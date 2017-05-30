@@ -1,0 +1,19 @@
+{
+  "name": "conmanaarjee",
+  "version": "1.0.1",
+  "private": true,
+  "description": "conman is an app",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.27"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Aarjee",
+  "license": "UNLICENCED"
+}

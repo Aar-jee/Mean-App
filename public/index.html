@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="conman">
+<head>
+	<title>finding conman</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="mainfile.css">
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('conman',['ngRoute']);
+	app.config(function($routeProvider) {
+  $routeProvider
+  .when("/", {
+    templateUrl : 'home.html',
+	controller: 'HomeController'
+  })
+  .when("/signup", {
+    templateUrl : 'signup.html',
+	controller: 'SignupController'
+  });
+});
+		app.controller('HomeController',function ($scope,$http){
+			$scope.SumitArraydata = function(){
+				$http.post('/conmanRoute',{anydata:$scope.ArraydataModel}).then(function(){
+					GetData();
+					$scope.ArraydataModel = '';
+				});
+			};
+			$scope.removeData = function(itemToDelete){
+				$http.put('/conmanRoute/remove',{x:itemToDelete}).then(function(){
+					GetData();
+				});
+			};
+			
+			function GetData(){
+				$http.get('/conmanRoute').then(function(response){
+				$scope.Arraydata = response.data;
+				return $scope.Arraydata;
+			});
+		}
+		GetData();
+	});
+	
+	app.controller('SignupController',function ($scope,$http){
+		console.log('you\'re on signup page');
+	});
+	</script>
+</head>
+<body>
+	<h1>Conman App</h1>
+   <div ng-view></div>
+</body>	
+</html>
