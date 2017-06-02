@@ -1,6 +1,7 @@
 <div class= "newArraydata">
-	<input type="text" class="form-control" ng-model="ArraydataModel" placeholder="enter string"/>
+	<input type="text" class="form-control" ng-model="ArraydataModel" ng-keypress="val=true" ng-keyup="val=false" ng-init="" placeholder="enter any string"/>
 	<button type="button" class="btn" ng-click="SumitArraydata()">Submit</button>
+	<label ng-show="val">Someone is typing...</label> 
 </div>
 <div ng-repeat="x in Arraydata">
 <span class= "glyphicon glyphicon-user">{{x.text}}</span>
