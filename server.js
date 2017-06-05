@@ -50,6 +50,11 @@ app.put('/conmanRoute/remove',function(req,res){
 	});
 	
 });
+
+app.post('/users', function(req,res){
+ console.log(req.body);
+ res.send();
+});
 app.listen(process.env.PORT, function(){
 	console.log('running on 3000');
 });
