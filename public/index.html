@@ -48,7 +48,18 @@
 	});
 	
 	app.controller('SignupController',function ($scope,$http){
-		console.log('you\'re on signup page');
+		$scope.submitSignup = function()
+		{
+			var newUser = {
+             username: $scope.user,
+			 passsword : $scope.pass
+			};
+		
+				$http.post('/users',newUser).then(function(){
+					alert('success');
+				});
+			
+		}
 	});
 	</script>
 </head>
