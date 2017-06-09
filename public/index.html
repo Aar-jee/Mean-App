@@ -7,65 +7,11 @@
 	<link rel="stylesheet" type="text/css" href="mainfile.css">
 	<script type="text/javascript" src="angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-	<script type="text/javascript">
-		var app = angular.module('conman',['ngRoute']);
-	app.config(function($routeProvider) {
-  $routeProvider
-  .when("/", {
-    templateUrl : 'home.html',
-	controller: 'HomeController'
-  })
-  .when("/signup", {
-    templateUrl : 'signup.html',
-	controller: 'SignupController'
-  });
-});
-		app.controller('HomeController',function ($scope,$http,$timeout){
-			$scope.SumitArraydata = function(){
-				$http.post('/conmanRoute',{anydata:$scope.ArraydataModel}).then(function(){
-					GetData();
-					$scope.ArraydataModel = '';
-					setTimeout(myReloadFunction, 3000);
-				});
-			};
-			$scope.removeData = function(itemToDelete){
-				$http.put('/conmanRoute/remove',{x:itemToDelete}).then(function(){
-					GetData();
-				});
-			};
-			
-			function myReloadFunction() {
-   			GetData();
-			$timeout(myReloadFunction, 3000);
-				}
-			function GetData(){
-				$http.get('/conmanRoute').then(function(response){
-				$scope.Arraydata = response.data;
-				return $scope.Arraydata;
-			});
-		}
-		$timeout(myReloadFunction, 3000);
-	});
-	
-	app.controller('SignupController',function ($scope,$http){
-		$scope.submitSignup = function()
-		{
-			var newUser = {
-             username: $scope.user,
-			 passsword : $scope.pass
-			};
-		
-				$http.post('/users',newUser).then(function(){
-					alert('success');
-					window.location = '#';
-				});
-			
-		}
-	});
-	</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
 </head>
 <body>
-	<h1>Conman App</h1>
+	<h1 class= "page-title"><a href="/"> Conman App </a></h1>
    <div ng-view></div>
 </body>	
 </html>
