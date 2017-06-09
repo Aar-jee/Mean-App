@@ -49,7 +49,7 @@ app.run(function($rootScope,$cookies){
 			};
 
             $scope.Logout = function(){
-                 console.log('logout me aaya');
+                 //console.log('logout me aaya');
                  $cookies.remove("crntuser");
                  $rootScope.currentuser = $cookies.get('crntuser');
                  $scope.username ="";
