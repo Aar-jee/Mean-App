@@ -15,20 +15,21 @@
 </div>
 
 <div id="login_form">
+     <div ng-hide="currentuser">
 	<h4>Login</h4>
     <form name="f1" id="f1">
         <table>
             <tr>
-                <td class="f1_label">User Name :</td><td><input type="text" placeholder="username" value="" />
+                <td class="f1_label">User Name :</td><td><input type="text" placeholder="username" ng-model="username" />
                 </td>
             </tr>
             <tr>
-                <td class="f1_label">Password  :</td><td><input type="password" placeholder="password" value=""  />
+                <td class="f1_label">Password  :</td><td><input type="password" placeholder="password" ng-model="password"  />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="Log In" style="font-size:18px; " />
+                    <input type="submit" value="Log In" style="font-size:18px;" ng-click="signin()" />
                 </td>
             </tr>
 			 <tr>
@@ -38,6 +39,8 @@
             </tr>
         </table>
     </form> 
+    </div>
+    <div ng-show="currentuser"> Welcome, {{currentuser}}</div>
 </div>
 		</body>
 </html>
