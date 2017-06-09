@@ -36,13 +36,16 @@ app.run(function($rootScope,$cookies){
 
 			$scope.signin = function(){
 				$http.put('/users/signin',{username: $scope.username, password: $scope.password}) //coming from the ng-model
-				.then(function(res){
+				.then(
+					function(res){
+						if(typeof res == 'string')
+						{alert(res);}
+						else{
 					console.log(res.data.token);
-                    //$cookies.put('token',res.data.token);
                     $cookies.put('crntuser',$scope.username);
-                     //$rootScope.token = res.data.token;
                      $rootScope.currentuser = $scope.username;
                    alert('successfully signed in');
+				   }
 				}, function(err){
 					alert('bad credentials');
 				});
