@@ -13,8 +13,8 @@ var app = angular.module('conman',['ngRoute','ngCookies']);
 });
 
 app.run(function($rootScope,$cookies){
-    if($cookies.get('token') && $cookies.get('crntuser')){
-        $rootScope.token = $cookies.get('token');
+    if($cookies.get('crntuser')){
+        //$rootScope.token = $cookies.get('token');
         $rootScope.currentuser = $cookies.get('crntuser');
     }
     else{}
@@ -38,15 +38,23 @@ app.run(function($rootScope,$cookies){
 				$http.put('/users/signin',{username: $scope.username, password: $scope.password}) //coming from the ng-model
 				.then(function(res){
 					console.log(res.data.token);
-                    $cookies.put('token',res.data.token);
+                    //$cookies.put('token',res.data.token);
                     $cookies.put('crntuser',$scope.username);
-                     $rootScope.token = res.data.token;
+                     //$rootScope.token = res.data.token;
                      $rootScope.currentuser = $scope.username;
                    alert('successfully signed in');
 				}, function(err){
 					alert('bad credentials');
 				});
-			}
+			};
+
+            $scope.Logout = function(){
+                 console.log('logout me aaya');
+                 $cookies.remove("crntuser");
+                 $rootScope.currentuser = $cookies.get('crntuser');
+                 $scope.username ="";
+                 $scope.password = "";
+			};
 			
 			function myReloadFunction() {
    			GetData();
