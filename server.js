@@ -76,8 +76,19 @@ app.post('/users', function (req, res) {
 
 app.put('/users/signin', function (req, res) {
 	db.collection('loginuser', function (err, loginuserCollection) {
+		console.log('this is server'+req.body.username);
+		if(req.body.username ===''){
+			console.log('please enter some value in textbox');
+			
+		}
+		else{
 	loginuserCollection.findOne({username: req.body.username},function(err,userdata){
-		console.log(userdata.password);
+		if(userdata === null){
+			
+			console.log('username not found');
+			
+		}
+		else{
 			bcrypt.compare(req.body.password, userdata.password, function(err,result){
 				if(result){
 					var mytoken = jwt.encode(userdata, JWT_SECRET); //userdata is the username and user password that is coming from database
@@ -85,10 +96,11 @@ app.put('/users/signin', function (req, res) {
 				}
 				else{ return res.status(400).send();}
 			});
+	}
 		});
+		}
 	});
 });
 app.listen(process.env.PORT, function(){
 	console.log('running on 3000');
 });
-
