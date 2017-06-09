@@ -40,7 +40,13 @@
         </table>
     </form> 
     </div>
-    <div ng-show="currentuser"> Welcome, {{currentuser}}</div>
+    <div ng-show="currentuser">
+         <table>
+             <tr><td></td><td><button class="btn btn-default" type = "button" ng-click="Logout()">Logout</button><td></tr>
+              <tr><td>Welcome, {{currentuser}}</td><td></td></tr>
+         </table>
+
+    </div>
 </div>
 		</body>
 </html>
