@@ -40,6 +40,13 @@ app.run(function($rootScope,$cookies){
 				});
 			};
 
+			$scope.removeUser = function(itemToDelete){
+				$http.put('/conmanUser/remove',{users:itemToDelete}).then(function(){
+					GetData();
+					GetUser();
+				});
+			};
+
 			$scope.signin = function(){
 				$http.put('/users/signin',{username: $scope.username, password: $scope.password}) //coming from the ng-model
 				.then(
@@ -68,6 +75,7 @@ app.run(function($rootScope,$cookies){
 			
 			function myReloadFunction() {
    			GetData();
+			GetUser();
 			$timeout(myReloadFunction, 3000);
 				}
 			function GetData(){
@@ -77,6 +85,12 @@ app.run(function($rootScope,$cookies){
 			});
 		}
 		$timeout(myReloadFunction, 3000);
+		function GetUser(){
+				$http.get('/conmanUser').then(function(response){
+				$scope.Userdata = response.data;
+				return $scope.Userdata;
+			});
+		}
 	});
 	
 	app.controller('SignupController',function ($scope,$http){
