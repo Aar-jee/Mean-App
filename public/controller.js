@@ -32,10 +32,11 @@ app.run(function($rootScope,$cookies){
 				});
 			};
 			$scope.removeData = function(itemToDelete){
-				$http.put('/conmanRoute/remove',{x:itemToDelete},
-				{headers:{
-					'authorization': $rootScope.token
-				}}).then(function(){
+				$http.put('/conmanRoute/remove',{x:itemToDelete}
+					  //,{headers:{
+					//'authorization': $rootScope.token
+				//}}
+					 ).then(function(){
 					GetData();
 				});
 			};
