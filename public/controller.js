@@ -14,22 +14,28 @@ var app = angular.module('conman',['ngRoute','ngCookies']);
 
 app.run(function($rootScope,$cookies){
     if($cookies.get('crntuser')){
-        //$rootScope.token = $cookies.get('token');
+        $rootScope.token = $cookies.get('token');
         $rootScope.currentuser = $cookies.get('crntuser');
-    }
+	}
     else{}
 });
 
 		app.controller('HomeController',function ($rootScope,$scope,$http,$timeout,$cookies){
 			$scope.SumitArraydata = function(){
-				$http.post('/conmanRoute',{anydata:$scope.ArraydataModel}).then(function(){
+				$http.post('/conmanRoute',{anydata: $scope.ArraydataModel},
+				{headers:{
+					'authorization': $rootScope.token
+				}}).then(function(){
 					GetData();
 					$scope.ArraydataModel = '';
 					setTimeout(myReloadFunction, 3000);
 				});
 			};
 			$scope.removeData = function(itemToDelete){
-				$http.put('/conmanRoute/remove',{x:itemToDelete}).then(function(){
+				$http.put('/conmanRoute/remove',{x:itemToDelete},
+				{headers:{
+					'authorization': $rootScope.token
+				}}).then(function(){
 					GetData();
 				});
 			};
@@ -41,20 +47,21 @@ app.run(function($rootScope,$cookies){
 						if(typeof res == 'string')
 						{alert(res);}
 						else{
-					console.log(res.data.token);
+					$cookies.put('token',res.data.token);
                     $cookies.put('crntuser',$scope.username);
                      $rootScope.currentuser = $scope.username;
-                   alert('successfully signed in');
-				   }
+					 $rootScope.token = res.data.token;
+					}
 				}, function(err){
 					alert('bad credentials');
 				});
 			};
 
             $scope.Logout = function(){
-                 //console.log('logout me aaya');
                  $cookies.remove("crntuser");
+				 $cookies.remove("token");
                  $rootScope.currentuser = $cookies.get('crntuser');
+				 $rootScope.token = $cookies.get('token');
                  $scope.username ="";
                  $scope.password = "";
 			};
