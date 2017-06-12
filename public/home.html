@@ -1,17 +1,22 @@
+
 <html>
 <head>
 <script type="text/javascript" src="angular.min.js"></script>	
 </head>
 <body>
 	
-<div class= "newArraydata">
-	<input type="text" class="form-control" ng-model="ArraydataModel" ng-keypress="val=true" ng-keyup="val=false" ng-init="" placeholder="enter any string"/>
-	<button type="button" class="btn" ng-click="SumitArraydata()">Submit</button>
-	<label ng-show="val">Someone is typing...</label> 
+<div class= "newArraydata" ng-show= "currentuser">
+        <input type="text" class="form-control" ng-model="ArraydataModel" ng-keypress="val=true" ng-keyup="val=false" ng-init="" placeholder="enter any string"/>
+	    <button type="button" class="btn" ng-click="SumitArraydata()">Submit</button>
+	    <label ng-show="val">Someone is typing...</label> 
 </div>
+</br>
 <div ng-repeat="x in Arraydata">
-<span class= "glyphicon glyphicon-user">{{x.text}}</span>
-<a href ng-click="removeData(x)"><span class= "glyphicon glyphicon-remove"></span></a>
+<tr>
+<td><span id="greyborder" class= "glyphicon glyphicon-user"><br><small>{{x.username}}</small></br></span></td>
+<td>{{x.text}}</td>
+<td><a href ng-click="removeData(x)"><span class= "glyphicon glyphicon-remove"></span></a></td>
+</tr>
 </div>
 
 <div id="login_form">
