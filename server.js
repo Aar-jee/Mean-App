@@ -1,3 +1,5 @@
+
+
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
@@ -33,9 +35,13 @@ app.get('/conmanRoute', function(req,res){
     });
 
 app.post('/conmanRoute', function(req,res){
+	var token = req.headers.authorization;//new
+	var user = jwt.decode(token,JWT_SECRET);//new
 	db.collection('meaows', function(err,meowsCollection){
 		var anyNewdata = {
-			text : req.body.anydata
+			text : req.body.anydata,
+			user : user._id,  // new
+			username: user.username
 		};
 		meowsCollection.insert(anyNewdata,{w:1},function(err,meowsdata){
 			return res.send();
@@ -46,9 +52,11 @@ app.post('/conmanRoute', function(req,res){
 });
 
 app.put('/conmanRoute/remove',function(req,res){
+	var token = req.headers.authorization;//new
+	var user = jwt.decode(token,JWT_SECRET);//new
 	db.collection('meaows', function(err,meowsCollection){
 		var deleteDataId = req.body.x._id;
-		meowsCollection.remove({_id: ObjectId(deleteDataId)},{w:1},function(err,meowsdata){
+		meowsCollection.remove({_id: ObjectId(deleteDataId),user: user._id},{w:1},function(err,meowsdata){
 			return res.send();
 		});
 	});
@@ -76,7 +84,6 @@ app.post('/users', function (req, res) {
 
 app.put('/users/signin', function (req, res) {
 	db.collection('loginuser', function (err, loginuserCollection) {
-		console.log('this is server'+req.body.username);
 		if(req.body.username ===''){
 			console.log('please enter some value in textbox');
 			
