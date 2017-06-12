@@ -32,6 +32,15 @@ app.get('/conmanRoute', function(req,res){
 
     });
 
+	app.get('/conmanUser', function(req,res){
+	db.collection('loginuser', function(err,loginuserCollection){
+		loginuserCollection.find().toArray(function(err,meowsdata){
+			return res.json(meowsdata);
+		});
+	});
+
+    });
+
 app.post('/conmanRoute', function(req,res){
 	var token = req.headers.authorization;//new
 	var user = jwt.decode(token,JWT_SECRET);//new
@@ -55,6 +64,16 @@ app.put('/conmanRoute/remove',function(req,res){
 	db.collection('meaows', function(err,meowsCollection){
 		var deleteDataId = req.body.x._id;
 		meowsCollection.remove({_id: ObjectId(deleteDataId),user: user._id},{w:1},function(err,meowsdata){
+			return res.send();
+		});
+	});
+	
+});
+
+app.put('/conmanUser/remove',function(req,res){
+	db.collection('loginuser', function(err,loginuserCollection){
+		var deleteDataId = req.body.users._id;
+		loginuserCollection.remove({_id: ObjectId(deleteDataId)},{w:1},function(err,meowsdata){
 			return res.send();
 		});
 	});
