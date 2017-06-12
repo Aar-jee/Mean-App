@@ -32,14 +32,14 @@ app.run(function($rootScope,$cookies){
 				});
 			};
 			$scope.removeData = function(itemToDelete){
-				$http.put('/conmanRoute/remove',{x:itemToDelete}
-					  //,{headers:{
-					//'authorization': $rootScope.token
-				//}}
-					 ).then(function(){
+				$http.put('/conmanRoute/remove',{x:itemToDelete}).then(function(){
 					GetData();
 				});
 			};
+					  //,{headers:{
+					//'authorization': $rootScope.token
+				//}}
+					
 
 			$scope.removeUser = function(itemToDelete){
 				$http.put('/conmanUser/remove',{users:itemToDelete}).then(function(){
