@@ -59,11 +59,11 @@ app.post('/conmanRoute', function(req,res){
 });
 
 app.put('/conmanRoute/remove',function(req,res){
-	//var token = req.headers.authorization;//new
-	//var user = jwt.decode(token,JWT_SECRET);//new
+	var token = req.headers.authorization;//new
+	var user = jwt.decode(token,JWT_SECRET);//new
 	db.collection('meaows', function(err,meowsCollection){
 		var deleteDataId = req.body.x._id;
-		meowsCollection.remove({_id: ObjectId(deleteDataId)},{w:1},function(err,meowsdata){
+		meowsCollection.remove({_id: ObjectId(deleteDataId),user: user._id},{w:1},function(err,meowsdata){
 			return res.send();
 		});
 	});
