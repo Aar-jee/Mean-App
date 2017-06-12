@@ -1,0 +1,30 @@
+1. hide submt textbox and button ng-show= "currentuser"
+2. inside submit method need to create code for individula meows like this:
+$scope.submit method
+$http.post('/meows', {newmeows: something}, {headers:{'authorization':$rootscope.token}}).then(){}
+
+3.app.post(jo method post krta h to add new tweets)
+var token = req.headers.authorization;//new
+var user = jwt.decode(token,JWT_SECRET);//new
+
+var newmeoaw = {
+
+text: req.body.newmeows,
+user : user._id,  // new
+username: user.username
+}
+
+4. show username in UI - 
+<BR>
+<small>{{meow.username}}</small>
+<BR>
+		
+5. now removing ke time  $scope.remove function ke andar:
+add  {headers:{'authorization':$rootscope.token}}
+
+6. app.put/remove jaha se user delete krte h 
+add   var token = req.headers.authorization;//new
+var user = jwt.decode(token,JWT_SECRET);//new
+
+
+meowscollection.remove({id, user: user._id})
