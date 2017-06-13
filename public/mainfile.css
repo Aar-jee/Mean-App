@@ -1,9 +1,7 @@
 #login_form {
     position: absolute;
-    top: 20%;
-    left: 30%;
-    right: 30%;
-    bottom: 20%;
+    top: 0%;
+    right: 0%;
     font-size: 18px;
 }
 
