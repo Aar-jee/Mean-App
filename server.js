@@ -8,7 +8,7 @@ var app = express();
 var JWT_SECRET = 'xxx';
 
 var db = null;
-var uri = "mongodb://rohitghai91:mongodb1@conmanmongoproj-shard-00-00-tddt5.mongodb.net:27017,conmanmongoproj-shard-00-01-tddt5.mongodb.net:27017,conmanmongoproj-shard-00-02-tddt5.mongodb.net:27017/mittens?ssl=true&replicaSet=ConmanMongoProj-shard-0&authSource=admin";
+var uri = "mongodb://@conmanmongoproj-shard-00-00-tddt5.mongodb.net:27017,conmanmongoproj-shard-00-01-tddt5.mongodb.net:27017,conmanmongoproj-shard-00-02-tddt5.mongodb.net:27017/mittens?ssl=true&replicaSet=ConmanMongoProj-shard-0&authSource=admin";
 //var uri = "mongodb://localhost:27017/mittens";
 MongoClient.connect(uri,function(err,dbconn){
 if(!err){
